@@ -4,10 +4,21 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static String solution(String s) {
+        String answerStr = "";
+        String[] splitStrList = s.split(" ");
+        for (String el : splitStrList) {
+            if (answerStr.length() < el.length()) {
+                answerStr = el;
+            }
+        }
+        return answerStr;
+    }
+
+    public static void main(String[] args){
         Scanner in=new Scanner(System.in);
-        int input1 = in.nextInt();
-        int input2 = in.nextInt();
-        System.out.println(input1 + input2);
+        String inputStr = in.nextLine();
+        String result = solution(inputStr);
+        System.out.println(result);
     }
 }
