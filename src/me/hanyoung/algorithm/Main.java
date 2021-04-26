@@ -4,10 +4,20 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static String solution(String s) {
+        String answer = "";
+
+        for (int i = 0; i < s.length(); i++) {
+            if(s.indexOf(s.charAt(i)) == i) answer += s.charAt(i);
+        }
+
+        return answer;
+    }
+
     public static void main(String[] args) {
+
         Scanner in=new Scanner(System.in);
-        int input1 = in.nextInt();
-        int input2 = in.nextInt();
-        System.out.println(input1 + input2);
+        String inputStr = in.next();
+        System.out.println(solution(inputStr));
     }
 }
