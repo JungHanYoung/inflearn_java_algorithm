@@ -1,57 +1,43 @@
 package me.hanyoung.algorithm;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    public static int getMax(int[] arrInt) {
-        int maxValue = Integer.MIN_VALUE;
-        for (int j : arrInt) {
-            if (maxValue < j) {
-                maxValue = j;
+    public static ArrayList<Integer> solution(int n, int[] arr) {
+        ArrayList<Integer> answer = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int tmp = arr[i];
+            int res = 0;
+            while(tmp > 0) {
+                int t = tmp % 10;
+                res = res * 10 + t;
+                tmp = tmp/10;
             }
+            if(isPrime(res)) answer.add(res);
         }
-        return maxValue;
+        return answer;
     }
 
-    public static List<Integer> solution(int[] arrInt) {
-        List<Integer> ret = new ArrayList<>();
-        int maxInArr = getMax(arrInt);
-        boolean[] primeArr = new boolean[maxInArr+1];
-        for (int i = 2; i <= maxInArr; i++) {
-            primeArr[i] = true;
+    private static boolean isPrime(int num) {
+        if(num == 1) return false;
+        for(int i = 2; i < num; i++) {
+            if(num%i == 0) return false;
         }
-        for (int i = 2; i <= maxInArr; i++) {
-            if(primeArr[i]) {
-                for (int j = i * i; j <= maxInArr; j += i) {
-                    primeArr[j] = false;
-                }
-            }
-        }
-
-        for (int value :
-                arrInt) {
-            if (value < 2) continue;
-            if(primeArr[value]) ret.add(value);
-        }
-
-        return ret;
+        return true;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int count = sc.nextInt();
-        int[] intList = new int[count];
+        int[] arr = new int[count];
         for (int i = 0; i < count; i++) {
-            intList[i] = Integer.parseInt(new StringBuilder(sc.next()).reverse()
-                    .toString());
+            arr[i] = sc.nextInt();
         }
-        List<Integer> result = solution(intList);
-        for (int value :
-                result) {
-            System.out.print(value + " ");
+        for (int x :
+                solution(count, arr)) {
+            System.out.print(x + " ");
         }
 
     }
