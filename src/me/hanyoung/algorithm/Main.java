@@ -1,6 +1,5 @@
 package me.hanyoung.algorithm;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -18,15 +17,15 @@ public class Main {
     }
 
     private static int solution(int n, int m, int[] arr) {
-        int pi = 0;
-        int answer = Integer.MIN_VALUE;
-        while(pi + m < arr.length) {
-            int sum = 0;
-            for (int i = pi; i < pi + m; i++) {
-                sum += arr[i];
-            }
-            if(answer < sum) answer = sum;
-            pi++;
+        int sum = 0;
+        for (int i = 0; i < m; i++) {
+            sum += arr[i];
+        }
+        int answer = sum;
+        for (int i = m; i < n; i++) {
+            sum += arr[i];
+            sum -= arr[i-m];
+            if(sum > answer) answer = sum;
         }
 
         return answer;
