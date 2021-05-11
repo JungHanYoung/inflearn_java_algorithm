@@ -18,17 +18,20 @@ public class Main {
 
     private static int solution(int n, int m, int[] arr) {
         // n: 배열 길이, m: 연속수열의 합 체크 값, arr: 배열
-        int front = 0, rear = 0, sum = 0, answer = 0;
-        while(rear < n) {
-            if(sum > m) {
-                sum -= arr[front++];
-            } else if(sum < m) {
-                sum += arr[rear++];
+        int lt = 0, rt = 0, sum = 0, answer = 0;
+        sum += arr[rt++];
+        if(sum == m) answer++;
+        while(rt < n || sum >= m) {
+            if(sum < m) {
+                sum += arr[rt++];
+            } else if(sum > m) {
+                sum -= arr[lt++];
             } else {
                 answer++;
-                sum += arr[rear++];
+                sum -= arr[lt++];
             }
         }
+
         return answer;
     }
 }
