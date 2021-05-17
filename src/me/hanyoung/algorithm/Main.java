@@ -6,8 +6,27 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner in=new Scanner(System.in);
-        int input1 = in.nextInt();
-        int input2 = in.nextInt();
-        System.out.println(input1 + input2);
+        int n = in.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = in.nextInt();
+        }
+        solution(n, arr);
+        for (int value :
+                arr) {
+            System.out.print(value + " ");
+        }
+    }
+
+    private static void solution(int n, int[] arr) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if(arr[j] > arr[j+1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
     }
 }
